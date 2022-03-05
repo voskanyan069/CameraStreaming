@@ -8,20 +8,28 @@
 #include <opencv2/videoio.hpp>
 #include <opencv2/highgui.hpp>
 
+#include "application/cmd_argument.hpp"
+
 class Camera
 {
 public:
-	Camera(const int& camera_id = 0, const int& api_id = cv::CAP_ANY);
+	Camera(const int& api_id = cv::CAP_ANY);
 	bool open();
 	~Camera();
 
 private:
 	bool show();
 	bool wait_for_close();
+	void save_frames();
+	const std::string get_date();
+	const ArgumentBase* find_argument(const std::string& name);
 
 private:
-	const int& m_device_id;
+	int m_device_id;
 	const int& m_api_id;
+	bool m_save_frames;
+	std::string m_frames_path;
+	CMDArguments& m_cmdargs;
 
 	cv::Mat* m_frame;
 	cv::VideoCapture* m_capture;
