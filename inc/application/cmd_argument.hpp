@@ -14,7 +14,6 @@ class CMDArgument : ArgumentBase
 public:
 	CMDArgument(const T& rhs) : m_value(rhs) {}
 	const T& get() const { return m_value; }
-	//void set(const T& rhs) { m_value = rhs; }
 
 private:
 	const T m_value;
@@ -27,6 +26,8 @@ public:
 
 	CMDArguments(const CMDArguments&) = delete;
 	CMDArguments& operator=(const CMDArguments&) = delete;
+
+	const ArgumentBase* find(const std::string& name);
 
 private:
 	CMDArguments();

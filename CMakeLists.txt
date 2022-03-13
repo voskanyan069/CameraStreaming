@@ -25,7 +25,18 @@ FILE(GLOB ALL_SOURCES
 	"${PROJECT_SOURCE_DIR}/inc/system/*.hpp"
 	)
 
-ADD_LIBRARY( camera_streaming SHARED ${ALL_SOURCES} )
-ADD_EXECUTABLE( CameraStreaming "${PROJECT_SOURCE_DIR}/src/main.cpp" )
+SET( EXEC_PATH "${CMAKE_CURRENT_BINARY_DIR}/CameraStreaming_bin $@" )
 
-TARGET_LINK_LIBRARIES( CameraStreaming ${TARGET_LIBS} )
+WRITE_FILE(
+	${CMAKE_CURRENT_BINARY_DIR}/CameraStreaming
+	"#!/bin/bash\n\n${EXEC_PATH}\nwhile [[ $? -eq 141 ]]\ndo\n\t${EXEC_PATH}\ndone"
+	)
+
+EXECUTE_PROCESS(
+	COMMAND bash -c "chmod +x ${CMAKE_CURRENT_BINARY_DIR}/CameraStreaming"
+	)
+
+ADD_LIBRARY( camera_streaming SHARED ${ALL_SOURCES} )
+ADD_EXECUTABLE( CameraStreaming_bin "${PROJECT_SOURCE_DIR}/src/main.cpp" )
+
+TARGET_LINK_LIBRARIES( CameraStreaming_bin ${TARGET_LIBS} )

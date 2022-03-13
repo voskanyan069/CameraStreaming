@@ -10,6 +10,16 @@ CMDArguments& CMDArguments::instance()
 	return INSTANCE;
 }
 
+const ArgumentBase* CMDArguments::find(const std::string& name)
+{
+    const auto& it = arguments.find(name);
+    if (it == arguments.end())
+    {
+        throw std::runtime_error(name + " not found");
+    }
+    return it->second;
+}
+
 CMDArguments::~CMDArguments()
 {
 }
