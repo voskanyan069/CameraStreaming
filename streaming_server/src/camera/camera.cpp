@@ -6,7 +6,7 @@
 #include <exception>
 
 #include "camera/camera.hpp"
-#include "system/system.hpp"
+#include "system/filesystem.hpp"
 
 Camera::Camera(const int api_id)
 	: m_cmdargs(CMDArguments::instance())
@@ -51,6 +51,10 @@ bool Camera::open()
     m_capture = new cv::VideoCapture();
 	m_capture->set(cv::CAP_PROP_FORMAT, CV_8UC1);
     m_capture->open(m_device_id, m_api_id);
+	if ( !m_capture->isOpened() )
+	{
+		return false;
+	}
 	while (1)
 	{
 		if (get_frame() || wait_for_close())

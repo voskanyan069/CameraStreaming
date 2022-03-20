@@ -11,19 +11,21 @@ class Application
 {
 public:
 	Application(const int argc, const char* argv[]);
-	int start();
-	~Application();
+	virtual bool parse_options() = 0;
+	virtual ~Application();
 
-private:
+protected:
+	virtual void add_options(po::options_description& desc) = 0;
+	virtual void count_options(const po::variables_map& vm) = 0;
+
 	void push_argument(const std::string& name, ArgumentBase* arg);
 	void push_bool(const std::string& name, const bool arg);
-	bool parse_options();
-	void count_options(const po::variables_map& vm);
-	void open_camera();
 
-private:
+protected:
 	const int m_argc;
 	const char** m_argv;
+
+private:
 	CMDArguments& m_cmdargs;
 };
 

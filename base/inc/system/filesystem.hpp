@@ -1,5 +1,5 @@
-#ifndef __SYSTEM_SYSTEM_HPP__
-#define __SYSTEM_SYSTEM_HPP__
+#ifndef __SYSTEM_FILESYSTEM_HPP__
+#define __SYSTEM_FILESYSTEM_HPP__
 
 #include <string>
 #include <iostream>
@@ -12,7 +12,7 @@ namespace fs = boost::filesystem;
 namespace sys
 {
 
-inline void create_directory(const std::string& path, bool create=false)
+inline void create_directory(const std::string& path, bool create=true)
 {
 	if (fs::exists(path))
 	{
@@ -35,4 +35,4 @@ inline void create_directory(const std::string& path, bool create=false)
 
 }
 
-#endif // __SYSTEM_SYSTEM_HPP__
+#endif // __SYSTEM_FILESYSTEM_HPP__

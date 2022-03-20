@@ -29,13 +29,16 @@ public:
 
 	const ArgumentBase* find(const std::string& name);
 
-private:
-	CMDArguments();
-	~CMDArguments();
-
 public:
 	std::map<std::string, ArgumentBase*> arguments;
 	std::vector<ArgumentBase*> args;
+
+private:
+	CMDArguments();
+	~CMDArguments();
 };
+
+typedef CMDArgument<std::string> CMDStrArgument;
+typedef CMDArgument<int>         CMDIntArgument;
 
 #endif // __APPLICATION_CMD_ARGUMENT_HPP__

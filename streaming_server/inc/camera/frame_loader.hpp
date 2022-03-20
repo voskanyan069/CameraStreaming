@@ -14,9 +14,6 @@ public:
 	virtual bool process(cv::Mat* frame) = 0;
 	virtual ~FrameLoader();
 
-private:
-	const std::string get_date();
-
 protected:
 	cv::Mat* m_frame;
 

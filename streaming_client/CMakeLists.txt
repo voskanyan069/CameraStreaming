@@ -1,0 +1,32 @@
+INCLUDE ( ../common.cmake )
+
+CMAKE_MINIMUM_REQUIRED( VERSION 3.10 )
+
+PROJECT( CameraStreaming VERSION 1.0 )
+
+FIND_PACKAGE( OpenCV REQUIRED )
+FIND_PACKAGE( Boost 1.71 COMPONENTS filesystem program_options REQUIRED )
+
+SET( TARGET_LIBS ${TARGET_LIBS} camera_streaming_client )
+SET( TARGET_LIBS ${TARGET_LIBS} ${Base_LIBRARIES} )
+SET( TARGET_LIBS ${TARGET_LIBS} ${OpenCV_LIBS} )
+SET( TARGET_LIBS ${TARGET_LIBS} ${Boost_LIBRARIES} )
+
+INCLUDE_DIRECTORIES(
+	${PROJECT_SOURCE_DIR}/inc
+	${PROJECT_SOURCE_DIR}/src
+	${Base_INCLUDE_DIR}
+	${OpenCV_INCLUDE_DIRS}
+	)
+
+FILE(GLOB ALL_SOURCES
+	"${PROJECT_SOURCE_DIR}/inc/application/*.hpp"
+	"${PROJECT_SOURCE_DIR}/src/application/*.cpp"
+	"${PROJECT_SOURCE_DIR}/inc/camera/*.hpp"
+	"${PROJECT_SOURCE_DIR}/src/camera/*.cpp"
+	)
+
+ADD_LIBRARY( camera_streaming_client SHARED ${ALL_SOURCES} )
+ADD_EXECUTABLE( CameraStreamingClient "${PROJECT_SOURCE_DIR}/src/main.cpp" )
+
+TARGET_LINK_LIBRARIES( CameraStreamingClient ${TARGET_LIBS} )

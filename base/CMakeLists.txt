@@ -1,0 +1,20 @@
+CMAKE_MINIMUM_REQUIRED( VERSION 3.10 )
+
+PROJECT( CameraStreaming VERSION 1.0 )
+
+SET( CMAKE_CXX_STANDARD 11 )
+
+FIND_PACKAGE( Boost 1.71 COMPONENTS filesystem program_options REQUIRED )
+
+INCLUDE_DIRECTORIES(
+	${PROJECT_SOURCE_DIR}/inc
+	${PROJECT_SOURCE_DIR}/src
+	)
+
+FILE(GLOB ALL_SOURCES
+	"${PROJECT_SOURCE_DIR}/inc/application/*.hpp"
+	"${PROJECT_SOURCE_DIR}/src/application/*.cpp"
+	"${PROJECT_SOURCE_DIR}/inc/system/*.hpp"
+	)
+
+ADD_LIBRARY( base SHARED ${ALL_SOURCES} )

@@ -20,7 +20,6 @@ public:
 private:
 	bool get_frame();
 	bool wait_for_close();
-	const std::string get_date();
 	const ArgumentBase* find_argument(const std::string& name);
 
 private:
