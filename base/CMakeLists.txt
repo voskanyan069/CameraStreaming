@@ -1,3 +1,6 @@
+SET( BASE_LIB 1 )
+INCLUDE ( ../common.cmake )
+
 CMAKE_MINIMUM_REQUIRED( VERSION 3.10 )
 
 PROJECT( CameraStreaming VERSION 1.0 )

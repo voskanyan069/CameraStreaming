@@ -26,15 +26,19 @@ FILE(GLOB ALL_SOURCES
 	"${PROJECT_SOURCE_DIR}/src/camera/*.cpp"
 	)
 
-SET( EXEC_PATH "${CMAKE_CURRENT_BINARY_DIR}/CameraStreamingServer_bin $@" )
+SET(
+	EXEC_PATH
+	"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/CameraStreamingServer_bin $@"
+	)
 
 WRITE_FILE(
-	${CMAKE_CURRENT_BINARY_DIR}/CameraStreamingServer
+	${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/CameraStreamingServer
 	"#!/bin/bash\n\n${EXEC_PATH}\nwhile [[ $? -eq 141 ]]\ndo\n\t${EXEC_PATH}\ndone"
 	)
 
 EXECUTE_PROCESS(
-	COMMAND bash -c "chmod +x ${CMAKE_CURRENT_BINARY_DIR}/CameraStreamingServer"
+	COMMAND
+	bash -c "chmod +x ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/CameraStreamingServer"
 	)
 
 ADD_LIBRARY( camera_streaming_server SHARED ${ALL_SOURCES} )
