@@ -76,9 +76,12 @@ void FrameStreaming::prepare_frame()
 
 bool FrameStreaming::send_frame()
 {
-	if ((m_bytes = send(m_socket, m_gray_frame->data, m_frame_size, 0)) < 0)
+	m_bytes = send(m_socket, m_gray_frame->data, m_frame_size, 0);
+	std::cout << " [@I] frame size: " << m_bytes << std::endl;
+	if (m_bytes < 0)
 	{
-		std::cout << " [@E] bytes = " << m_bytes << std::endl;
+		std::cout << " [@E] failed to send frame (bytes = "
+			<< m_bytes << ")" << std::endl;
 		return true;
 	}
 	return false;

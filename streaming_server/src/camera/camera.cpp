@@ -50,6 +50,8 @@ bool Camera::open()
 	m_frame = new cv::Mat();
     m_capture = new cv::VideoCapture();
 	m_capture->set(cv::CAP_PROP_FORMAT, CV_8UC1);
+	m_capture->set(cv::CAP_PROP_FRAME_WIDTH, 640);
+	m_capture->set(cv::CAP_PROP_FRAME_HEIGHT, 480);
     m_capture->open(m_device_id, m_api_id);
 	if ( !m_capture->isOpened() )
 	{
