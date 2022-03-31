@@ -122,5 +122,4 @@ CameraViewer::~CameraViewer()
 {
 	close(m_socket);
 	delete m_frame;
-	delete m_iptr;
 }
