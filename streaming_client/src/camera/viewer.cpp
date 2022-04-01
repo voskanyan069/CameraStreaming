@@ -12,8 +12,8 @@ CameraViewer::CameraViewer()
 	: m_cmdargs(CMDArguments::instance())
 	, m_socket(socket(PF_INET, SOCK_STREAM, 0))
 	, m_iptr(0)
-	, m_frame_size(0)
 	, m_frame(new cv::Mat(cv::Mat::zeros(480, 640, CV_8UC1)))
+	, m_frame_size(m_frame->total() * m_frame->elemSize())
 	, m_save(m_cmdargs.find("save_frames")->get<bool>())
 	, m_host(m_cmdargs.find("host")->get<std::string>())
 	, m_port(m_cmdargs.find("port")->get<int>())
@@ -50,7 +50,6 @@ bool CameraViewer::connect_to_socket()
 
 void CameraViewer::create_window()
 {
-	m_frame_size = m_frame->total() * m_frame->elemSize();
     m_iptr = m_frame->data;
 	if ( !m_frame->isContinuous() )
 	{
@@ -74,7 +73,6 @@ void CameraViewer::save_frame(const cv::Mat& frame)
 
 bool CameraViewer::receive_frame()
 {
-	int key = 0;
     int bytes = 0;
 	bytes = recv(m_socket, m_iptr, m_frame_size, MSG_WAITALL);
 	if (-1 == bytes)
@@ -83,6 +81,7 @@ bool CameraViewer::receive_frame()
 			      << bytes << std::endl;
 		return 1;
 	}
+	std::cout << " [@I] Feame received: " << bytes << std::endl;
 	cv::Mat gray_frame;
 	cv::cvtColor(*m_frame, gray_frame, cv::COLOR_GRAY2BGR);
 	cv::imshow("live client", gray_frame);
