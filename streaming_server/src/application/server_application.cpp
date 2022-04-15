@@ -19,7 +19,7 @@ void ServerApplication::add_options(po::options_description& desc)
          "enable/disable frames saving")
         ("streaming-mode,s", po::bool_switch(&m_is_streaming),
          "enable/disable camera streaming to clients")
-        ("port,P", po::value<int>()->default_value(57606),
+        ("port,P", po::value<int>()->default_value(13023),
          "port for camera streaming server")
         ("path,p", po::value<std::string>()->default_value("./data/"),
          "path to save frames")

@@ -19,7 +19,7 @@ void ClientApplication::add_options(po::options_description& desc)
          "set hostname to connect")
         ("save-frames,S", po::bool_switch(&m_is_save),
          "enable/disable frames saving")
-        ("port,P", po::value<int>()->default_value(57606),
+        ("port,P", po::value<int>()->default_value(13023),
          "port of the streaming server")
         ("path,p", po::value<std::string>()->default_value("./data/"),
          "path to save frames")

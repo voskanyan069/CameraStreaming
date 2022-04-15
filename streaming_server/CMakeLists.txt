@@ -20,9 +20,7 @@ INCLUDE_DIRECTORIES(
 	)
 
 FILE(GLOB ALL_SOURCES
-	"${PROJECT_SOURCE_DIR}/inc/application/*.hpp"
 	"${PROJECT_SOURCE_DIR}/src/application/*.cpp"
-	"${PROJECT_SOURCE_DIR}/inc/camera/*.hpp"
 	"${PROJECT_SOURCE_DIR}/src/camera/*.cpp"
 	)
 
